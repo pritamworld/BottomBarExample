@@ -2,6 +2,7 @@ package com.moxdroid.bottombarexample;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationCallback;
@@ -66,5 +67,8 @@ public class FingerprintHandler extends AuthenticationCallback
         Toast.makeText(appContext,
                 "Authentication succeeded.",
                 Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(appContext,MainActivity.class);
+        appContext.startActivity(intent);
     }
 }
