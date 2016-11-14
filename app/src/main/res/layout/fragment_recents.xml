@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -6,8 +6,20 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txtTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recent Fragment"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"/>
+
+    <WebView
+        android:id="@+id/myWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Recent Fragment"/>
+        android:layout_below="@+id/txtTitle"
+        android:layout_alignParentStart="true"/>
 
-</FrameLayout>
+</RelativeLayout>
