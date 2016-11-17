@@ -86,7 +86,7 @@ int a;
                 // called when request is retried
                 Log.d(TAG, "onRetry: ");
             }
-            
+
         });
         return view;
     }
