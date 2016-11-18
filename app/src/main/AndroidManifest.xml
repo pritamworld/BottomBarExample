@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -17,11 +19,13 @@
         <activity
             android:name=".FingerprintDemoActivity"
             android:label="@string/finger_print_activity">
-
         </activity>
         <activity android:name=".bluetooth.DeviceList"/>
         <activity android:name=".bluetooth.ledControl"/>
         <activity android:name=".bluetooth.TimerTestActivity">
+
+        </activity>
+        <activity android:name=".locations.LocationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
