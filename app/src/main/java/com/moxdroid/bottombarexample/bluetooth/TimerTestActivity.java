@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.moxdroid.bottombarexample.MySampleSingleton;
 import com.moxdroid.bottombarexample.R;
 
 
@@ -18,11 +20,17 @@ public class TimerTestActivity extends AppCompatActivity
 
     Handler bluetoothHandler;
     static int i;
+    MySampleSingleton mySampleSingleton;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_test);
+
+        mySampleSingleton = MySampleSingleton.getInstance();
+        mySampleSingleton.setName("Pritesh");
+        mySampleSingleton.setName("Patel");
+        mySampleSingleton.setName("Toronto");
 
         txtTimer = (TextView)findViewById(R.id.txtTimer);
         btnTimer = (Button)findViewById(R.id.btnTimer);
@@ -31,6 +39,15 @@ public class TimerTestActivity extends AppCompatActivity
 
         ///Set time interval here
         bluetoothHandler.postDelayed(runnable, 1000);
+
+        btnTimer.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Log.d(TAG, "onClick: " + mySampleSingleton.getNameByIndex(1));
+            }
+        });
 
     }
 
