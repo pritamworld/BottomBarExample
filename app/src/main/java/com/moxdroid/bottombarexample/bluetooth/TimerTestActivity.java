@@ -73,7 +73,12 @@ public class TimerTestActivity extends AppCompatActivity
 
     //Write Data Updation code here
     void setData(){
-        i++;
+
         txtTimer.setText("From Timer : " + i);
+
+        if(mySampleSingleton.getNameByIndex(i)!=null)
+            Log.d(TAG, "setData: " + mySampleSingleton.getNameByIndex(i));
+        i++;
+
     }
 }
