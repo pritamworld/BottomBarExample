@@ -23,14 +23,18 @@
         <activity android:name=".bluetooth.DeviceList"/>
         <activity android:name=".bluetooth.ledControl"/>
         <activity android:name=".bluetooth.TimerTestActivity">
-
         </activity>
         <activity android:name=".locations.LocationActivity">
+
+        </activity>
+        <activity android:name=".base.MyMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".base.SettingsActivity">
         </activity>
     </application>
 
