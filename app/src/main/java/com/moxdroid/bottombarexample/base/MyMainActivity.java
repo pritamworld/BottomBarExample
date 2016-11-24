@@ -15,7 +15,8 @@ public class MyMainActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_main);
-        Log.d(TAG, "onCreate: B");
+        a = 200;
+        Log.d(TAG, "onCreate: B " +a);
     }
 
     public void onClick(View view){

@@ -28,11 +28,14 @@ public abstract class BaseActivity extends AppCompatActivity
 {
     private static String TAG = BaseActivity.class.getSimpleName();
     private ProgressDialog mProgressDialog;
+    int a;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: A");
+        a = 100;
+        Log.d(TAG, "onCreate: A " +a);
+
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
