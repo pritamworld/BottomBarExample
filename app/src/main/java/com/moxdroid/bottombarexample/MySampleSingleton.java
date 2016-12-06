@@ -8,39 +8,43 @@ import java.util.ArrayList;
  */
 public class MySampleSingleton
 {
-    ArrayList<String>nameArrayList;
     private static MySampleSingleton ourInstance;
-
-    public static synchronized MySampleSingleton getInstance()
-    {
-        if(ourInstance==null)
-            ourInstance = new MySampleSingleton();
-
-        return ourInstance;
-    }
+    ArrayList<String> nameArrayList;
 
     private MySampleSingleton()
     {
         nameArrayList = new ArrayList<>();
     }
 
-    public String getNameByIndex(int index){
-        if(index < 0 || index >= nameArrayList.size())
+    public static synchronized MySampleSingleton getInstance()
+    {
+        if (ourInstance == null)
+            ourInstance = new MySampleSingleton();
+
+        return ourInstance;
+    }
+
+    public String getNameByIndex(int index)
+    {
+        if (index < 0 || index >= nameArrayList.size())
             return null;
 
         return nameArrayList.get(index);
     }
 
-    public void setName(String name){
+    public void setName(String name)
+    {
         nameArrayList.add(name);
     }
 
-    public ArrayList<String>getAllName(){
+    public ArrayList<String> getAllName()
+    {
         return nameArrayList;
     }
 
-    public boolean deleteNameByIndex(int index){
-        if(!(index < 0 || index >= nameArrayList.size()))
+    public boolean deleteNameByIndex(int index)
+    {
+        if (!(index < 0 || index >= nameArrayList.size()))
         {
             nameArrayList.remove(index);
             return true;

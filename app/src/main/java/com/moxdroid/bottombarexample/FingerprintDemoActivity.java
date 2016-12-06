@@ -48,7 +48,8 @@ public class FingerprintDemoActivity extends AppCompatActivity
         fingerprintManager =
                 (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
-        if (!keyguardManager.isKeyguardSecure()) {
+        if (!keyguardManager.isKeyguardSecure())
+        {
 
             Toast.makeText(this,
                     "Lock screen security not enabled in Settings",
@@ -58,7 +59,8 @@ public class FingerprintDemoActivity extends AppCompatActivity
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.USE_FINGERPRINT) !=
-                PackageManager.PERMISSION_GRANTED) {
+                PackageManager.PERMISSION_GRANTED)
+        {
             Toast.makeText(this,
                     "Fingerprint authentication permission not enabled",
                     Toast.LENGTH_LONG).show();
@@ -66,7 +68,8 @@ public class FingerprintDemoActivity extends AppCompatActivity
             return;
         }
 
-        if (!fingerprintManager.hasEnrolledFingerprints()) {
+        if (!fingerprintManager.hasEnrolledFingerprints())
+        {
 
             // This happens when no fingerprints are registered.
             Toast.makeText(this,
@@ -77,36 +80,44 @@ public class FingerprintDemoActivity extends AppCompatActivity
 
         generateKey();
 
-        if (cipherInit()) {
+        if (cipherInit())
+        {
             cryptoObject =
                     new FingerprintManager.CryptoObject(cipher);
         }
 
-        if (cipherInit()) {
+        if (cipherInit())
+        {
             cryptoObject = new FingerprintManager.CryptoObject(cipher);
             FingerprintHandler helper = new FingerprintHandler(this);
             helper.startAuth(fingerprintManager, cryptoObject);
         }
     }
 
-    protected void generateKey() {
-        try {
+    protected void generateKey()
+    {
+        try
+        {
             keyStore = KeyStore.getInstance("AndroidKeyStore");
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
 
-        try {
+        try
+        {
             keyGenerator = KeyGenerator.getInstance(
                     KeyProperties.KEY_ALGORITHM_AES,
                     "AndroidKeyStore");
         } catch (NoSuchAlgorithmException |
-                NoSuchProviderException e) {
+                NoSuchProviderException e)
+        {
             throw new RuntimeException(
                     "Failed to get KeyGenerator instance", e);
         }
 
-        try {
+        try
+        {
             keyStore.load(null);
             keyGenerator.init(new
                     KeyGenParameterSpec.Builder(KEY_NAME,
@@ -120,33 +131,40 @@ public class FingerprintDemoActivity extends AppCompatActivity
             keyGenerator.generateKey();
         } catch (NoSuchAlgorithmException |
                 InvalidAlgorithmParameterException
-                | CertificateException | IOException e) {
+                | CertificateException | IOException e)
+        {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean cipherInit() {
-        try {
+    public boolean cipherInit()
+    {
+        try
+        {
             cipher = Cipher.getInstance(
                     KeyProperties.KEY_ALGORITHM_AES + "/"
                             + KeyProperties.BLOCK_MODE_CBC + "/"
                             + KeyProperties.ENCRYPTION_PADDING_PKCS7);
         } catch (NoSuchAlgorithmException |
-                NoSuchPaddingException e) {
+                NoSuchPaddingException e)
+        {
             throw new RuntimeException("Failed to get Cipher", e);
         }
 
-        try {
+        try
+        {
             keyStore.load(null);
             SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME,
                     null);
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return true;
-        } catch (KeyPermanentlyInvalidatedException e) {
+        } catch (KeyPermanentlyInvalidatedException e)
+        {
             return false;
         } catch (KeyStoreException | CertificateException
                 | UnrecoverableKeyException | IOException
-                | NoSuchAlgorithmException | InvalidKeyException e) {
+                | NoSuchAlgorithmException | InvalidKeyException e)
+        {
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }

@@ -27,39 +27,45 @@ import com.moxdroid.bottombarexample.R;
 public abstract class BaseActivity extends AppCompatActivity
 {
     private static String TAG = BaseActivity.class.getSimpleName();
-    private ProgressDialog mProgressDialog;
     int a;
+    private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         a = 100;
-        Log.d(TAG, "onCreate: A " +a);
+        Log.d(TAG, "onCreate: A " + a);
 
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.menu_common, menu);
 
         // Get the SearchView and set the searchable configuration
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+        {
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setIconifiedByDefault(true);
 
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+            {
 
                 @Override
-                public boolean onQueryTextSubmit(String s) {
+                public boolean onQueryTextSubmit(String s)
+                {
                     Log.d(TAG, "onQueryTextSubmit ");
                     return false;
                 }
 
                 @Override
-                public boolean onQueryTextChange(String s) {
+                public boolean onQueryTextChange(String s)
+                {
                     Log.d(TAG, "onQueryTextChange ");
                     return false;
                 }
@@ -68,24 +74,31 @@ public abstract class BaseActivity extends AppCompatActivity
 
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int itemId = item.getItemId();
 
-        if (itemId == android.R.id.home) {
+        if (itemId == android.R.id.home)
+        {
             finish();
 
-        } else if (itemId == R.id.menu_settings) {
+        } else if (itemId == R.id.menu_settings)
+        {
             startActivity(new Intent(this, SettingsActivity.class));
 
-        } else if (itemId == R.id.menu_search) {
+        } else if (itemId == R.id.menu_search)
+        {
             onSearchRequested();
 
         }
 
         return super.onOptionsItemSelected(item);
     }
-    protected void showProgress(String msg) {
+
+    protected void showProgress(String msg)
+    {
         if (mProgressDialog != null && mProgressDialog.isShowing())
             dismissProgress();
 
@@ -93,26 +106,32 @@ public abstract class BaseActivity extends AppCompatActivity
         mProgressDialog.setCancelable(true);
     }
 
-    protected void dismissProgress() {
-        if (mProgressDialog != null) {
+    protected void dismissProgress()
+    {
+        if (mProgressDialog != null)
+        {
             mProgressDialog.dismiss();
             mProgressDialog = null;
         }
     }
 
-    protected void showToast(String msg) {
+    protected void showToast(String msg)
+    {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
-    protected void showAlert(String msg) {
+    protected void showAlert(String msg)
+    {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.app_name))
                 .setMessage(msg)
                 .setCancelable(false)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
                         dialogInterface.dismiss();
                     }
                 }).create().show();

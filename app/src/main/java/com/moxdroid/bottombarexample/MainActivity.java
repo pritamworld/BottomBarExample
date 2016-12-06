@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity
 {
 
     FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,22 +25,26 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.container,new RecentsFragment())
+                .add(R.id.container, new RecentsFragment())
                 .commit();
 
         BottomNavigationView bottomNavigation =
                 (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
                 handleBottomNavigationItemSelected(item);
                 return true;
             }
         });
     }
 
-    private void handleBottomNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    private void handleBottomNavigationItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case R.id.action_recents:
                 switchFragment(new RecentsFragment());
                 break;
@@ -52,9 +57,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void switchFragment(Fragment fragment){
+    private void switchFragment(Fragment fragment)
+    {
         fragmentManager.beginTransaction()
-                .replace(R.id.container,fragment)
+                .replace(R.id.container, fragment)
                 .commit();
     }
 }

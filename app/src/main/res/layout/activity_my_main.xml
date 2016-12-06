@@ -12,32 +12,32 @@
     tools:context="com.moxdroid.bottombarexample.base.MyMainActivity">
 
     <Button
-        android:text="Show Alert"
+        android:id="@+id/btnShowAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="119dp"
-        android:id="@+id/btnShowAlert"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:text="Show Alert"/>
 
     <ToggleButton
-        android:text="Progress Bar"
+        android:id="@+id/btnProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnShowAlert"
         android:layout_alignStart="@+id/btnShowAlert"
-        android:id="@+id/btnProgressBar"
-        android:onClick="onClick"/>
+        android:layout_below="@+id/btnShowAlert"
+        android:onClick="onClick"
+        android:text="Progress Bar"/>
 
     <Button
-        android:text="Toast"
+        android:id="@+id/btnToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnProgressBar"
         android:layout_centerHorizontal="true"
-        android:id="@+id/btnToast"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:text="Toast"/>
 
 
 </RelativeLayout>

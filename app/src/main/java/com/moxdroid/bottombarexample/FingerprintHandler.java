@@ -20,18 +20,21 @@ public class FingerprintHandler extends AuthenticationCallback
     private CancellationSignal cancellationSignal;
     private Context appContext;
 
-    public FingerprintHandler(Context context) {
+    public FingerprintHandler(Context context)
+    {
         appContext = context;
     }
 
     public void startAuth(FingerprintManager manager,
-                          FingerprintManager.CryptoObject cryptoObject) {
+                          FingerprintManager.CryptoObject cryptoObject)
+    {
 
         cancellationSignal = new CancellationSignal();
 
         if (ActivityCompat.checkSelfPermission(appContext,
                 Manifest.permission.USE_FINGERPRINT) !=
-                PackageManager.PERMISSION_GRANTED) {
+                PackageManager.PERMISSION_GRANTED)
+        {
             return;
         }
         manager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
@@ -39,7 +42,8 @@ public class FingerprintHandler extends AuthenticationCallback
 
     @Override
     public void onAuthenticationError(int errMsgId,
-                                      CharSequence errString) {
+                                      CharSequence errString)
+    {
         Toast.makeText(appContext,
                 "Authentication error\n" + errString,
                 Toast.LENGTH_LONG).show();
@@ -47,28 +51,31 @@ public class FingerprintHandler extends AuthenticationCallback
 
     @Override
     public void onAuthenticationHelp(int helpMsgId,
-                                     CharSequence helpString) {
+                                     CharSequence helpString)
+    {
         Toast.makeText(appContext,
                 "Authentication help\n" + helpString,
                 Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void onAuthenticationFailed() {
-        Toast.makeText(appContext,
-                "Authentication failed.",
-                Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void onAuthenticationSucceeded(
-            FingerprintManager.AuthenticationResult result) {
+            FingerprintManager.AuthenticationResult result)
+    {
 
         Toast.makeText(appContext,
                 "Authentication succeeded.",
                 Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(appContext,MainActivity.class);
+        Intent intent = new Intent(appContext, MainActivity.class);
         appContext.startActivity(intent);
+    }
+
+    @Override
+    public void onAuthenticationFailed()
+    {
+        Toast.makeText(appContext,
+                "Authentication failed.",
+                Toast.LENGTH_LONG).show();
     }
 }

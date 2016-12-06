@@ -14,13 +14,35 @@ import com.moxdroid.bottombarexample.R;
 
 public class TimerTestActivity extends AppCompatActivity
 {
+    static int i;
     private static String TAG = TimerTestActivity.class.getSimpleName();
     TextView txtTimer;
     Button btnTimer;
-
     Handler bluetoothHandler;
-    static int i;
     MySampleSingleton mySampleSingleton;
+    //Runnable class
+    Runnable runnable = new Runnable()
+    {
+
+        @Override
+        public void run()
+        {
+            try
+            {
+                //do your code here
+                setData();
+            } catch (Exception e)
+            {
+                // TODO: handle exception
+                Log.d(TAG, "run: ");
+            } finally
+            {
+                //also call the same runnable to call it at regular interval
+                bluetoothHandler.postDelayed(this, 1000);
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,8 +54,8 @@ public class TimerTestActivity extends AppCompatActivity
         mySampleSingleton.setName("Patel");
         mySampleSingleton.setName("Toronto");
 
-        txtTimer = (TextView)findViewById(R.id.txtTimer);
-        btnTimer = (Button)findViewById(R.id.btnTimer);
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
+        btnTimer = (Button) findViewById(R.id.btnTimer);
 
         bluetoothHandler = new Handler();
 
@@ -51,32 +73,13 @@ public class TimerTestActivity extends AppCompatActivity
 
     }
 
-    //Runnable class
-    Runnable runnable = new Runnable() {
-
-        @Override
-        public void run() {
-            try{
-                //do your code here
-                setData();
-            }
-            catch (Exception e) {
-                // TODO: handle exception
-                Log.d(TAG, "run: ");
-            }
-            finally{
-                //also call the same runnable to call it at regular interval
-                bluetoothHandler.postDelayed(this, 1000);
-            }
-        }
-    };
-
     //Write Data Updation code here
-    void setData(){
+    void setData()
+    {
 
         txtTimer.setText("From Timer : " + i);
 
-        if(mySampleSingleton.getNameByIndex(i)!=null)
+        if (mySampleSingleton.getNameByIndex(i) != null)
             Log.d(TAG, "setData: " + mySampleSingleton.getNameByIndex(i));
         i++;
 

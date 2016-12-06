@@ -34,7 +34,7 @@ public class LocationActivity extends AppCompatActivity implements
     Location mLastLocation;
     TextView mLatitudeText, mLongitudeText;
     LocationRequest mLocationRequest;
-    int REQUEST_CODE_RECOVER_PLAY_SERVICES=200;
+    int REQUEST_CODE_RECOVER_PLAY_SERVICES = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,23 +45,12 @@ public class LocationActivity extends AppCompatActivity implements
         mLatitudeText = (TextView) findViewById(R.id.txtLatitudeText);
         mLongitudeText = (TextView) findViewById(R.id.txtLongitudeText);
 
-        if(checkGooglePlayServices())
+        if (checkGooglePlayServices())
         {
             createLocationRequest();
             buildGoogleApiClient();
         }
 
-    }
-
-    protected synchronized void buildGoogleApiClient() {
-        if (mGoogleApiClient == null)
-        {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
     }
 
     protected void onStart()
@@ -76,11 +65,23 @@ public class LocationActivity extends AppCompatActivity implements
         super.onStop();
     }
 
+    protected synchronized void buildGoogleApiClient()
+    {
+        if (mGoogleApiClient == null)
+        {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+    }
+
     @Override
     public void onConnected(@Nullable Bundle bundle)
     {
         Log.d(TAG, "onConnected: 1");
-        if(checkPermission())
+        if (checkPermission())
         {
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
@@ -93,6 +94,12 @@ public class LocationActivity extends AppCompatActivity implements
                 mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
             }
         }
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i)
+    {
 
     }
 
@@ -110,16 +117,11 @@ public class LocationActivity extends AppCompatActivity implements
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             requestPermissions(new String[]{ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION}, 100);
-        }else{
+        } else
+        {
             //startLocationUpdates();
         }
         return true;
-    }
-
-    @Override
-    public void onConnectionSuspended(int i)
-    {
-
     }
 
     @Override
@@ -128,23 +130,13 @@ public class LocationActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults){
-        switch(permsRequestCode){
-            case 100:
-                //boolean cameraAccepted = grantResults[0]==PackageManager.PERMISSION_GRANTED;
-                Toast.makeText(getApplicationContext(), "Permission  granted", Toast.LENGTH_LONG).show();
-                break;
-            default:
-                super.onRequestPermissionsResult(permsRequestCode, permissions, grantResults);
-        }
-    }
-
-    private boolean checkGooglePlayServices(){
+    private boolean checkGooglePlayServices()
+    {
         int checkGooglePlayServices = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(this);
-        if (checkGooglePlayServices != ConnectionResult.SUCCESS) {
-		/*
+        if (checkGooglePlayServices != ConnectionResult.SUCCESS)
+        {
+        /*
 		* Google Play Services is missing or update is required
 		*  return code could be
 		* SUCCESS,
@@ -159,16 +151,22 @@ public class LocationActivity extends AppCompatActivity implements
 
         return true;
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_RECOVER_PLAY_SERVICES) {
-            if (resultCode == RESULT_OK) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == REQUEST_CODE_RECOVER_PLAY_SERVICES)
+        {
+            if (resultCode == RESULT_OK)
+            {
                 // Make sure the app is not already connected or attempting to connect
                 if (!mGoogleApiClient.isConnecting() &&
-                        !mGoogleApiClient.isConnected()) {
+                        !mGoogleApiClient.isConnected())
+                {
                     mGoogleApiClient.connect();
                 }
-            } else if (resultCode == RESULT_CANCELED) {
+            } else if (resultCode == RESULT_CANCELED)
+            {
                 Toast.makeText(this, "Google Play Services must be installed.",
                         Toast.LENGTH_SHORT).show();
                 finish();
@@ -176,7 +174,22 @@ public class LocationActivity extends AppCompatActivity implements
         }
     }
 
-    protected void createLocationRequest() {
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults)
+    {
+        switch (permsRequestCode)
+        {
+            case 100:
+                //boolean cameraAccepted = grantResults[0]==PackageManager.PERMISSION_GRANTED;
+                Toast.makeText(getApplicationContext(), "Permission  granted", Toast.LENGTH_LONG).show();
+                break;
+            default:
+                super.onRequestPermissionsResult(permsRequestCode, permissions, grantResults);
+        }
+    }
+
+    protected void createLocationRequest()
+    {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(20000);
         mLocationRequest.setFastestInterval(5000);
@@ -196,8 +209,10 @@ public class LocationActivity extends AppCompatActivity implements
         }
     }
 
-    protected void stopLocationUpdates() {
-        if (mGoogleApiClient != null) {
+    protected void stopLocationUpdates()
+    {
+        if (mGoogleApiClient != null)
+        {
             LocationServices.FusedLocationApi.removeLocationUpdates(
                     mGoogleApiClient, this);
         }

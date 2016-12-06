@@ -10,16 +10,18 @@ import com.moxdroid.bottombarexample.R;
 public class MyMainActivity extends BaseActivity
 {
     private static String TAG = MyMainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_main);
         a = 200;
-        Log.d(TAG, "onCreate: B " +a);
+        Log.d(TAG, "onCreate: B " + a);
     }
 
-    public void onClick(View view){
+    public void onClick(View view)
+    {
 
         switch (view.getId())
         {
@@ -28,7 +30,7 @@ public class MyMainActivity extends BaseActivity
                 break;
 
             case R.id.btnProgressBar:
-                if(((ToggleButton)findViewById(R.id.btnProgressBar)).isChecked())
+                if (((ToggleButton) findViewById(R.id.btnProgressBar)).isChecked())
                     showProgress("Loading...");
                 else dismissProgress();
                 break;
