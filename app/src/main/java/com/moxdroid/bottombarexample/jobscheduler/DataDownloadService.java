@@ -5,21 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-public class RssDownloadService extends IntentService
+public class DataDownloadService extends IntentService
 {
-    private static final String TAG = RssDownloadService.class.getCanonicalName();
+    private static final String TAG = DataDownloadService.class.getCanonicalName();
     private static final String ACTION_RSS_DOWNLOAD = "com.moxdroid.bottombarexample.jobscheduler.action.START_DOWNLOAD";
     public static final String EXTRA_PARAM_URL = "com.moxdroid.bottombarexample.jobscheduler.extra.URL";
     public static final String URL ="http://www.google.com/";
 
-    public RssDownloadService()
+    public DataDownloadService()
     {
-        super("RssDownloadService");
+        super("DataDownloadService");
     }
 
     public static void startActionDownload(Context context, String param1)
     {
-        Intent intent = new Intent(context, RssDownloadService.class);
+        Intent intent = new Intent(context, DataDownloadService.class);
         intent.setAction(ACTION_RSS_DOWNLOAD);
         intent.putExtra(EXTRA_PARAM_URL, param1);
         context.startService(intent);

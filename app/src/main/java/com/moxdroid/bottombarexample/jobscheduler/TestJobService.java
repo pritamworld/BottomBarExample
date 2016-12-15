@@ -16,8 +16,8 @@ public class TestJobService extends JobService
     public boolean onStartJob(JobParameters jobParameters)
     {
         Log.i(TAG, "on start job: " + jobParameters.getJobId());
-        String url = jobParameters.getExtras().getString(RssDownloadService.EXTRA_PARAM_URL);
-        RssDownloadService.startActionDownload(TestJobService.this,url);
+        String url = jobParameters.getExtras().getString(DataDownloadService.EXTRA_PARAM_URL);
+        DataDownloadService.startActionDownload(TestJobService.this,url);
         return false;
     }
 

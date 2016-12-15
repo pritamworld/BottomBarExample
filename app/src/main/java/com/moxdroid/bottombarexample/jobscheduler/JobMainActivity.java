@@ -29,11 +29,12 @@ public class JobMainActivity extends AppCompatActivity
         JobInfo.Builder builder = new JobInfo.Builder(kJobId++, mServiceComponent);
         //Pass Parameter to Job Scheduler
         PersistableBundle bundle = new PersistableBundle();
-        bundle.putString(RssDownloadService.EXTRA_PARAM_URL,RssDownloadService.URL);
+        bundle.putString(DataDownloadService.EXTRA_PARAM_URL, DataDownloadService.URL);
         builder.setExtras(bundle)
                 .setPersisted(true);
-        builder.setMinimumLatency(5 * 1000); // wait at least
-        builder.setOverrideDeadline(50 * 1000); // maximum delay
+        builder.setPeriodic(60000);//10 Seconds
+        //builder.setMinimumLatency(5 * 1000); // wait at least
+        //builder.setOverrideDeadline(50 * 1000); // maximum delay
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED); // require unmetered network
         builder.setRequiresDeviceIdle(true); // device should be idle
         builder.setRequiresCharging(false); // we don't care if the device is charging or not
