@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -25,17 +26,32 @@
         <activity android:name=".bluetooth.TimerTestActivity">
         </activity>
         <activity android:name=".locations.LocationActivity">
-
         </activity>
         <activity android:name=".base.MyMainActivity">
+
+        </activity>
+        <activity android:name=".base.SettingsActivity">
+        </activity>
+        <activity android:name=".jobscheduler.JobMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".base.SettingsActivity">
-        </activity>
+
+        <receiver
+            android:name=".jobscheduler.BootReceiver"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <service
+            android:name=".jobscheduler.RssDownloadService"
+            android:exported="false"/>
+
+        <service android:name=".jobscheduler.TestJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE"
+                 android:exported="true"/>
     </application>
 
 </manifest>
