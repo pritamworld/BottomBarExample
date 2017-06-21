@@ -20,6 +20,10 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.moxdroid.bottombarexample.R;
+import com.moxdroid.bottombarexample.models.Mathematica;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -27,7 +31,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class LocationActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener
+        LocationListener,
+        Mathematica
 {
     private static String TAG = LocationActivity.class.getSimpleName();
     GoogleApiClient mGoogleApiClient;
@@ -50,6 +55,11 @@ public class LocationActivity extends AppCompatActivity implements
             createLocationRequest();
             buildGoogleApiClient();
         }
+
+        mLatitudeText.setOnEditorActionListener((textView, i, keyEvent) -> {
+            getData();
+            return false;
+        });
 
     }
 
@@ -218,4 +228,22 @@ public class LocationActivity extends AppCompatActivity implements
         }
     }
 
+    void getData(){
+        List<String> list =
+                Arrays.asList("a1", "a2", "a3", "b1", "c2", "c1");
+
+        list.stream()
+                .filter(s -> s.startsWith("c"))
+                .sorted()
+                .forEach(s -> Log.v("TEST", s));
+
+        Log.v("TEST", "result : " + multiply(3, 4));
+        Log.v("TEST", "result : " + add(3, 4));
+    }
+
+    @Override
+    public int add(int a, int b)
+    {
+        return a+b;
+    }
 }

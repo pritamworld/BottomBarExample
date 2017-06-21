@@ -31,24 +31,11 @@
         </activity>
         <activity android:name=".base.SettingsActivity">
         </activity>
-        <activity android:name=".jobscheduler.JobMainActivity">
-
-        </activity>
-
-        <receiver
-            android:name=".jobscheduler.BootReceiver"
-            android:enabled="true"
-            android:exported="true"/>
-
-        <service
-            android:name=".jobscheduler.DataDownloadService"
-            android:exported="false"/>
-        <service
-            android:name=".jobscheduler.TestJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <activity android:name=".observerpattern.SampleObserverActivity">
+
+        </activity>
+        <activity android:name=".TestConstraintsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
